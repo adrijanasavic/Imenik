@@ -36,6 +36,7 @@ public class AddNumberActivity extends AppCompatActivity {
     private EditText broj;
     private Spinner spinner;
     private Button btn_addBroj;
+    private Button btn_cancelBroj;
     private int objekat_id;
     private String kategorijaBroja;
     private Kontakt kontakt;
@@ -63,12 +64,20 @@ public class AddNumberActivity extends AppCompatActivity {
             }
         } );
 
+        btn_cancelBroj.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        } );
+
     }
 
 
     private void addNumber() {
         broj = findViewById( R.id.add_noviBroj );
         btn_addBroj = findViewById( R.id.btn_addNoviBroj );
+        btn_cancelBroj = findViewById( R.id.btn_cancelNoviBroj );
 
     }
 

@@ -1,9 +1,11 @@
 package com.example.imenik.activities;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,11 +22,15 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +39,8 @@ import com.example.imenik.adapters.AdapterBrojeva;
 import com.example.imenik.db.DatabaseHelper;
 import com.example.imenik.db.model.Broj;
 import com.example.imenik.db.model.Kontakt;
+import com.example.imenik.dialog.AboutDialog;
+import com.example.imenik.settings.SettingsActivity;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 import java.sql.SQLException;
@@ -42,6 +50,10 @@ import java.util.List;
 public class DetailsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private ArrayList<String> drawerItems;
+    private ListView drawerList;
 
     private TextView firstName;
     private TextView lastName;
@@ -67,6 +79,8 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView( R.layout.activity_details );
 
         setupToolbar();
+        fillDataDrawer();
+        setupDrawer();
         fillData();
         preuzmiPodatkeIzIntenta();
         refresh();
@@ -248,6 +262,63 @@ public class DetailsActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void fillDataDrawer() {
+        drawerItems = new ArrayList<>();
+        drawerItems.add( "Lista kontakata" );
+        drawerItems.add( "Podesavanja" );
+        drawerItems.add( "O aplikaciji" );
+    }
+
+    private void setupDrawer() {
+        drawerList = findViewById( R.id.left_drawer );
+        drawerLayout = findViewById( R.id.drawer_layout );
+        drawerList.setAdapter( new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1, drawerItems ) );
+        drawerList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String title = "Unknown";
+                switch (i) {
+                    case 0:
+                        title = "Lista kontakata";
+                        startActivity( new Intent( DetailsActivity.this, MainActivity.class ) );
+                        break;
+                    case 1:
+                        Toast.makeText( getBaseContext(), "Prikaz podesavanja", Toast.LENGTH_SHORT );
+                        title = "Podesavanja";
+                        startActivity( new Intent( DetailsActivity.this, SettingsActivity.class ) );
+                        break;
+                    case 2:
+                        title = "O aplikaciji";
+                        AboutDialog dialog = new AboutDialog( DetailsActivity.this );
+                        dialog.show();
+                        break;
+                    default:
+                        break;
+                }
+                setTitle( title );
+                drawerLayout.closeDrawer( Gravity.LEFT );
+            }
+        } );
+
+        drawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.app_name,
+                R.string.app_name
+        ) {
+            public void onDrawerClosed(View view) {
+                getSupportActionBar().setTitle( "" );
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                getSupportActionBar().setTitle( "" );
+                invalidateOptionsMenu();
+            }
+        };
+    }
     public void setupToolbar() {
         toolbar = findViewById( R.id.toolbar );
         setSupportActionBar( toolbar );

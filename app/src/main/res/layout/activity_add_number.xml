@@ -39,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_addNoviBroj"
@@ -47,6 +48,13 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@android:drawable/ic_menu_add"
             android:text="Dodajte" />
+
+        <Button
+            android:id="@+id/btn_cancelNoviBroj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
+            android:text="Odustanite" />
 
     </LinearLayout>
 

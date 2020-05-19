@@ -7,6 +7,11 @@
 
     <include layout="@layout/include_toolbar" />
 
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +41,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kliknite na sliku"
+                android:text="Kliknite na sliku da se uveca"
                 android:layout_marginTop="20dp">
 
             </TextView>
@@ -123,4 +128,24 @@
             android:layout_margin="10dp" />
 
     </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/drawerPane"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
+
+
+            <ListView
+                android:id="@+id/left_drawer"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@color/colorAccent"
+                android:choiceMode="singleChoice"
+                android:divider="@android:color/white"
+                android:dividerHeight="1dp" />
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </LinearLayout>

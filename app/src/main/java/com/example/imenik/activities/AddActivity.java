@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -61,6 +62,9 @@ public class AddActivity extends AppCompatActivity  {
 
     public static final String NOTIF_CHANNEL_ID = "notif_channel_007";
     private SharedPreferences prefs;
+
+    private ImageView preview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,13 +136,21 @@ public class AddActivity extends AppCompatActivity  {
 
     }
     private void add(){
+//        if (preview == null || image_path == null) {
+//                Toast.makeText( AddActivity.this, "Slika mora biti izabrana", Toast.LENGTH_SHORT ).show();
+//                return;
+//            }
         if(Tools.validateInput( ime )
                 && Tools.validateInput( prezime )
+                && Tools.validateInput( adresa )
                 && Tools.validateInput( brojTelefona )
+
+
 
         ) {
             kategorijaBroja = spinner.getSelectedItem().toString();
             Toast.makeText(this, "Selektovano je "+ kategorijaBroja, Toast.LENGTH_SHORT).show();
+
 
             kontakt = new Kontakt();
             kontakt.setmIme( ime.getText().toString().trim());

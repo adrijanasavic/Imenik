@@ -30,7 +30,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AdapterContact.OnRecyclerItemClickListener{
+public class MainActivity extends AppCompatActivity implements AdapterContact.OnRecyclerItemClickListener {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
