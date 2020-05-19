@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.imenik.R;
+import com.example.imenik.dialog.AboutDialog;
 
 import java.util.ArrayList;
 
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 setTitle( "Podesavanja" );
                 break;
             case R.id.action_about:
+                AboutDialog dialog = new AboutDialog( this );
+                dialog.show();
                 setTitle( "O aplikaciji" );
                 break;
         }
@@ -93,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         title = "O aplikaciji";
+                        AboutDialog dialog = new AboutDialog( MainActivity.this );
+                        dialog.show();
                         break;
                     default:
                         break;
