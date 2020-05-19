@@ -13,7 +13,7 @@ public class Broj {
     @DatabaseField(columnName = "mKategorijaTel")
     private String mKategorijaTel;
     @DatabaseField(foreign = true,foreignAutoRefresh = true,foreignAutoCreate = true)
-    private Kontakt mKontakt;
+    private Kontakt kontakt;
 
     public Broj() {
     }
@@ -42,12 +42,12 @@ public class Broj {
         this.mKategorijaTel = mKategorijaTel;
     }
 
-    public Kontakt getmKontakt() {
-        return mKontakt;
+    public Kontakt getKontakt() {
+        return kontakt;
     }
 
-    public void setmKontakt(Kontakt mKontakt) {
-        this.mKontakt = mKontakt;
+    public void setKontakt(Kontakt kontakt) {
+        this.kontakt = kontakt;
     }
 
     @Override

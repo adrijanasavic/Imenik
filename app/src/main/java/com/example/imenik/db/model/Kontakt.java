@@ -24,7 +24,7 @@ public class Kontakt {
     private String mSlika;
 
     @ForeignCollectionField(foreignFieldName = "kontakt",eager = true)
-    private ForeignCollection<Broj> mBroj;
+    private ForeignCollection<Broj> broj;
 
     public Kontakt() {
     }
@@ -69,12 +69,12 @@ public class Kontakt {
         this.mSlika = mSlika;
     }
 
-    public ForeignCollection<Broj> getmBroj() {
-        return mBroj;
+    public ForeignCollection<Broj> getBroj() {
+        return broj;
     }
 
-    public void setmBroj(ForeignCollection<Broj> mBroj) {
-        this.mBroj = mBroj;
+    public void setBroj(ForeignCollection<Broj> broj) {
+        this.broj = broj;
     }
 
     @Override

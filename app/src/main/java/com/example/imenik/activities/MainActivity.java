@@ -161,11 +161,11 @@ public class MainActivity extends AppCompatActivity implements AdapterContact.On
     }
 
     @Override
-    public void onRVItemClick(Kontakt kontakt) {
+    public void onRVItemClick(Kontakt objekat) {
 
-        Toast.makeText( this, "Detalji kontakta " + kontakt.getmIme() + " " + kontakt.getmPrezime(), Toast.LENGTH_SHORT ).show();
+        Toast.makeText( this, "Detalji kontakta " + objekat.getmIme() + " " + objekat.getmPrezime(), Toast.LENGTH_SHORT ).show();
         Intent intent = new Intent( this, DetailsActivity.class );
-        intent.putExtra( "objekat_id", kontakt.getId() );
+        intent.putExtra( "objekat_id", objekat.getId() );
 
         startActivity( intent );
     }
