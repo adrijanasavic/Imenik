@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.imenik.R;
 import com.example.imenik.dialog.AboutDialog;
+import com.example.imenik.settings.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 setTitle( "Novi kontakt" );
                 break;
             case R.id.action_settings:
+                startActivity( new Intent( this, SettingsActivity.class ) );
                 setTitle( "Podesavanja" );
                 break;
             case R.id.action_about:
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         Toast.makeText( getBaseContext(), "Prikaz podesavanja", Toast.LENGTH_SHORT );
                         title = "Podesavanja";
+                        startActivity( new Intent( MainActivity.this, SettingsActivity.class ) );
                         break;
                     case 2:
                         title = "O aplikaciji";
