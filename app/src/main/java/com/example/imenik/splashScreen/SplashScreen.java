@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.imenik.MainActivity;
+import com.example.imenik.activities.MainActivity;
 import com.example.imenik.R;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        splashTime = prefs.getString(getString( R.string.splashtime_key), "500");
+        splashTime = prefs.getString(getString( R.string.splashtime_key), "2000");
 
         splash = prefs.getBoolean(getString(R.string.splash_key), true);
 
