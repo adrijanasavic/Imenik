@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="3dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginBottom="3dp"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/rv_broj_phone_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="kategorija" />
+
+        <TextView
+            android:id="@+id/rv_broj_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_broj_phone_category"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:drawableStart="@drawable/phone"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="0644917853" />
+
+        <TextView
+            android:id="@+id/rv_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_broj_phone_category"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/rv_broj_phone"
+            android:drawableStart="@drawable/message"
+            android:text="message"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
