@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,12 +20,17 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.imenik.R;
+import com.example.imenik.adapters.AdapterContact;
+import com.example.imenik.db.DatabaseHelper;
+import com.example.imenik.db.model.Kontakt;
 import com.example.imenik.dialog.AboutDialog;
 import com.example.imenik.settings.SettingsActivity;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterContact.OnRecyclerItemClickListener{
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -31,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> drawerItems;
     private ListView drawerList;
 
+    private RecyclerView recyclerView;
+    private AdapterContact adapterContact;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
         fillDataDrawer();
         setupToolbar();
         setupDrawer();
+
+        refresh();
+
     }
 
     @Override
@@ -52,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_create:
+                startActivity( new Intent( this, AddActivity.class ) );
                 setTitle( "Novi kontakt" );
                 break;
             case R.id.action_settings:
@@ -143,6 +157,45 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator( R.drawable.drawer );
             actionBar.setHomeButtonEnabled( true );
             actionBar.show();
+        }
+    }
+
+    @Override
+    public void onRVItemClick(Kontakt kontakt) {
+
+        Toast.makeText( this, "Detalji kontakta " + kontakt.getmIme() + " " + kontakt.getmPrezime(), Toast.LENGTH_SHORT ).show();
+        Intent intent = new Intent( this, DetailsActivity.class );
+        intent.putExtra( "objekat_id", kontakt.getId() );
+
+        startActivity( intent );
+    }
+
+    private void refresh() {
+        recyclerView = findViewById( R.id.rvList );
+        recyclerView.setLayoutManager( new LinearLayoutManager( this ) );
+        try {
+            adapterContact = new AdapterContact( getDatabaseHelper().getKontaktDao().queryForAll(), this );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        recyclerView.setAdapter( adapterContact );
+
+    }
+
+    public DatabaseHelper getDatabaseHelper() {
+        if (databaseHelper == null) {
+            databaseHelper = OpenHelperManager.getHelper( this, DatabaseHelper.class );
+        }
+        return databaseHelper;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
         }
     }
 }
